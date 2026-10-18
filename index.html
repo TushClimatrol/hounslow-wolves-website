@@ -1202,7 +1202,7 @@ const CAT={sat:"Saturdays",sun:"Sundays",fives:"5-a-side"};
 function renderTeams(f="all"){$("#teamGrid").innerHTML=CONFIG.teams.filter(t=>f==="all"||t.cat===f).map(t=>`
   <article class="team" data-age="${{sat:"SAT",sun:"SUN",fives:"5s"}[t.cat]}"><span class="pill">${CAT[t.cat]}</span><h3>${t.name}</h3>
   <div class="meta"><div><b>${t.sub}</b> · ${t.level}</div><div><b>${t.league}</b></div><div>Cups: ${t.cups}</div><div><b>Training ${t.day}s</b> ${t.time} · ${t.venue}</div>${t.home?`<div><b>Home</b> · <a href="#grounds" style="color:inherit">${t.home}</a></div>`:""}<div>Manager: ${t.coach}</div></div>
-  <div class="foot"><span class="spots ${t.spots<=3?"low":""}">${t.id==="fives"?"Squad picked from the Sat & Sun teams":t.spots<=3?"Only "+t.spots+" places left":t.spots+" squad places open"}</span>${t.id==="fives"?`<a class="btn btn-ghost" href="#contact" style="padding:10px 14px;font-size:14px">By invitation</a>`:`<a class="btn btn-primary" href="#contact" data-join="${t.name}" style="padding:10px 14px;font-size:14px">Contact to join</a>`}</div></article>`).join("")}
+  <div class="foot"><span class="spots">${t.id==="fives"?"Squad picked from the Sat & Sun teams":"Spaces open — fill out the form to join"}</span>${t.id==="fives"?`<a class="btn btn-ghost" href="#contact" style="padding:10px 14px;font-size:14px">By invitation</a>`:`<a class="btn btn-primary" href="#contact" data-join="${t.name}" style="padding:10px 14px;font-size:14px">Contact to join</a>`}</div></article>`).join("")}
 renderTeams();
 $("#teamTabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;$$("#teamTabs .tab").forEach(t=>{t.classList.toggle("on",t===b);t.setAttribute("aria-selected",t===b)});renderTeams(b.dataset.f)});
 
