@@ -1264,7 +1264,7 @@ async function sendForm(){const t=JOIN_TEAMS.find(x=>x.id===booking.team);const 
  const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),12000);
  try{const r=await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload),signal:ctl.signal});clearTimeout(timer);if(!r.ok)throw new Error(r.status);const j=await r.json().catch(()=>({}));if(j&&j.success===false&&!/activate/i.test(j.message||""))throw new Error(j.message||"rejected");return true}catch(e){clearTimeout(timer);return false}}
 function renderPanel(){const P=$("#panel");const t=booking.team&&JOIN_TEAMS.find(x=>x.id===booking.team);
- if(step===1){P.innerHTML=`<h3>Which squad are you after?</h3><div class="squad-pick">${JOIN_TEAMS.map(x=>`<button class="choice ${booking.team===x.id?"on":""}" data-t="${x.id}"><b>${x.name}</b><span>${x.league}</span><span>Trains ${x.day}s ${x.time}</span></button>`).join("")}</div>
+ if(step===1){P.innerHTML=`<h3>Which squad are you after?</h3><div class="squad-pick">${JOIN_TEAMS.map(x=>`<button class="choice ${booking.team===x.id?"on":""}" data-t="${x.id}"><b>${x.name}</b><span>${x.league}</span><span>Trains midweek at Springwest Academy</span></button>`).join("")}</div>
   <p style="font-size:13px;color:var(--muted)">The 5s squad is picked from the Saturday and Sunday teams, so start with one of these.</p>
   <div class="panel-foot"><span class="err" id="err"></span><button class="btn btn-primary" id="next1">Your details <span class="arr">→</span></button></div>`;
   $$("[data-t]",P).forEach(b=>b.onclick=()=>{booking.team=b.dataset.t;$$("[data-t]",P).forEach(x=>x.classList.toggle("on",x===b));$("#err").textContent=""});
