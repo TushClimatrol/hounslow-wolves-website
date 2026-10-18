@@ -701,12 +701,12 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
       <div class="hero-right">
         <p class="hero-lede">Hounslow Wolves FC is an FA England Accredited men's club in West London. Saturday first team in the MCFL Saturday Division One West, two Sunday sides in the NSMBL, and a five-a-side squad on the tournament circuit. Est. 2020.</p>
       <aside class="next" aria-label="Next fixture" id="nextCard">
-        <div class="row"><span class="eyebrow">Next fixture · Sunday XIs</span><span class="num" id="nextDate" style="color:var(--muted);font-size:13px"></span></div>
-        <div class="teams">Kingston Elite vs <em>Hounslow Wolves</em></div>
+        <div class="row"><span class="eyebrow">Next fixture · Saturdays</span><span class="num" id="nextDate" style="color:var(--muted);font-size:13px"></span></div>
+        <div class="teams"><em>Hounslow Wolves</em> vs Ickenham</div>
         <div class="count" id="count" aria-live="off">
           <div><b id="cd">0</b><small>Days</small></div><div><b id="ch">0</b><small>Hrs</small></div><div><b id="cm">0</b><small>Min</small></div><div><b id="cs">0</b><small>Sec</small></div>
         </div>
-        <div class="row" style="font-size:13px;color:var(--muted)"><span>NSMBL Premier Division · Away</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
+        <div class="row" style="font-size:13px;color:var(--muted)"><span>MCFL Division One West · Home · SKYex Stadium, Hayes</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
         <div class="next-acts"><a class="btn btn-primary" id="calBtn" href="#" target="_blank" rel="noopener">Add to calendar</a><button class="btn btn-ghost" id="shareBtn" type="button">Share</button></div>
         <div class="next-status" id="nextStatus"></div>
       </aside>
@@ -811,7 +811,7 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
       <div class="table-card rv" id="leagueCard">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h3>League table</h3><span style="font-size:12px;color:var(--muted)" id="ltName"></span></div>
         <div style="overflow-x:auto"><table class="lt"><thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr></thead><tbody id="lt"></tbody></table></div>
-        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><small style="font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)" id="ltUpdated"></small><div><small style="font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)">Sunday XIs form</small><div class="form-strip" style="margin-top:6px" id="formStrip"></div></div></div>
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><small style="font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)" id="ltUpdated"></small><div><small style="font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)" id="formLabel">Saturdays form</small><div class="form-strip" style="margin-top:6px" id="formStrip"></div></div></div>
       </div>
       <div class="table-card rv" style="margin-top:16px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><h3>26/27 cup competitions</h3><span style="font-size:12px;color:var(--muted)">13 trophies to play for</span></div>
@@ -1072,7 +1072,7 @@ const CONFIG = {
   paypalLink: "",                                      // bookings
   paypalShopLink: "",                                  // club shop checkout
   paypalSubsLink: "",                                  // player subs payment                                      // PayPal payment link for bookings (set once created)
-  nextFixture: "2026-10-25T10:30:00",                  // Kingston Elite v Hounslow Wolves (Sunday XIs, NSMBL Premier) — 10.30 KO
+  nextFixture: "2026-10-24T14:00:00",                  // Hounslow Wolves v Ickenham (Saturdays, MCFL Div One West) — 2pm KO, SKYex
   prices: { trial: 10, session: 8, monthly: 40, annual: 150 },   // placeholders
   teams: [
     { id:"sat",   name:"Wolves Saturdays", sub:"First team", cat:"sat",   league:"MCFL Saturday Division One West", cups:"Middlesex County Cup · League Cup", day:"Wednesday", time:"20:15–22:00", venue:"Springwest Academy, Feltham", home:"Hayes & Yeading United FC (astro), Hayes", coach:"Tarren Patel", spots:3, level:"Step 7 standard · competitive" },
@@ -1081,13 +1081,10 @@ const CONFIG = {
     { id:"fives", name:"Wolves 5s", sub:"Five-a-side squad", cat:"fives", league:"Powerleague, Goals & national tournament heats", cups:"Boohoo Man Cup · IFT · KSS Cup", day:"Wednesday", time:"20:00–21:00", venue:"Springwest Academy, Feltham", home:"Tournament venues (announced on socials)", coach:"Rishi Ghataore", spots:0, level:"Fast football · tournament weekends · by invitation" }
   ],
   fixtures: {
-    sat: [
-      { d:"2026-09-12", comp:"MCFL Saturday Division One West", h:"Hounslow Wolves", a:"Townmead" },
-      { d:"2026-09-19", comp:"MCFL Saturday Division One West", h:"Wiseman West", a:"Hounslow Wolves" },
-      { d:"2026-09-26", comp:"Jim Rogers President's Division One Cup · Round 1", h:"Hounslow Wolves", a:"Wiseman West" },
-      { d:"2026-10-03", comp:"MCFL Saturday Division One West", h:"Barnes", a:"Hounslow Wolves" },
-      { d:"2026-10-10", comp:"MCFL Saturday Division One West", h:"Hounslow Wolves", a:"Ruislip Town" },
-      { d:"2026-10-17", comp:"Middlesex County FA Intermediate Cup · Round 1", h:"Hounslow Wolves", a:"LBS Lions" }
+    sat: [   // MCFL Saturday Division One West — source: Mitoo (LeagueCode MDX2026, DivisionID 101). Saturday KO 14:00.
+      { d:"2026-10-24", t:"14:00", comp:"MCFL Saturday Division One West", h:"Hounslow Wolves", a:"Ickenham", venue:"SKYex Community Stadium, Hayes (H)" },
+      { d:"2026-11-14", t:"14:00", comp:"MCFL Saturday Division One West", h:"East Sheen", a:"Hounslow Wolves", venue:"Rosslyn Park FC (A)" },
+      { d:"2026-11-28", t:"14:00", comp:"Jim Rogers President's Division One Cup · Round 2", h:"Hounslow Wolves", a:"Rose", venue:"SKYex Community Stadium, Hayes (H)" }
     ],
     sun: [   // "Hounslow Wolves Sunday" on FA Full-Time — NSMBL Premier Division
       { d:"2026-10-25", t:"10:30", comp:"NSMBL Premier Division", h:"Kingston Elite", a:"Hounslow Wolves XIs", venue:"Kingston Elite (A)" },
@@ -1101,7 +1098,14 @@ const CONFIG = {
     fives: []
   },
   results: {
-    sat: [],
+    sat: [
+      { d:"2026-10-17", comp:"Middlesex FA Intermediate Cup · R1", h:"Hounslow Wolves", a:"LBS Lions", s:"0–1", r:"l" },
+      { d:"2026-10-10", comp:"MCFL Division One West", h:"Hounslow Wolves", a:"Ruislip Town", s:"2–2", note:"Abdali, Zaheed", r:"d" },
+      { d:"2026-10-03", comp:"MCFL Division One West", h:"Barnes", a:"Hounslow Wolves", s:"1–4", note:"Njoroge 2, Abdali, Newbury", r:"w" },
+      { d:"2026-09-26", comp:"President's Division One Cup · R1", h:"Hounslow Wolves", a:"Wiseman West", s:"5–0", r:"w" },
+      { d:"2026-09-19", comp:"MCFL Division One West", h:"Wiseman West", a:"Hounslow Wolves", s:"0–1", r:"w" },
+      { d:"2026-09-12", comp:"MCFL Division One West", h:"Hounslow Wolves", a:"Townmead", s:"3–2", r:"w" }
+    ],
     sun: [
       { d:"2026-10-18", comp:"NSMBL Sunday Cup", h:"Hounslow Wolves XIs", a:"ECS Classic XI FC 1st", s:"1–4", note:"HT 1–3", r:"l" },
       { d:"2026-10-11", comp:"Middlesex FA Sunday Intermediate Cup", h:"Hounslow Wolves XIs", a:"Burreli Camden First", s:"3–3", note:"Won 5–4 on pens · through to round 2", r:"w" },
@@ -1120,8 +1124,8 @@ const CONFIG = {
     ]
   },
   tables: {
-   sat: { name:"MCFL Saturday Division One West", updated:"14 Oct 2026", rows:[
-    ["Ruislip Rangers",4,4,0,0,17,4,12],["Ickenham",5,4,0,1,15,6,12],["Hounslow Wolves",4,3,1,0,10,5,10],["AFC Southall",3,2,0,1,9,9,6],["Ruislip Town",2,1,1,0,4,3,4],["Barnes",4,1,1,2,6,9,4],["Townmead",4,1,0,3,3,8,3],["Wiseman West",3,1,0,2,1,6,3],["East Sheen",4,0,1,3,4,9,1],["London Park United",2,0,0,2,0,0,0],["CB Hounslow & Abbots Senior Reserves",3,0,0,3,1,11,0]
+   sat: { name:"MCFL Saturday Division One West", updated:"18 Oct 2026", rows:[
+    ["Ickenham",6,5,0,1,19,8,15],["Ruislip Rangers",4,4,0,0,17,4,12],["Hounslow Wolves",4,3,1,0,10,5,10],["AFC Southall",3,2,0,1,9,9,6],["Ruislip Town",2,1,1,0,4,3,4],["Barnes",5,1,1,3,8,12,4],["London Park United",3,1,0,2,3,2,3],["Townmead",4,1,0,3,3,8,3],["Wiseman West",3,1,0,2,1,6,3],["East Sheen",5,0,1,4,6,13,1],["CB Hounslow & Abbots Senior Reserves",3,0,0,3,1,11,0]
    ] },
    sun: { name:"NSMBL Premier Division", updated:"18 Oct 2026", rows:[
     ["Brentford Town FC",3,2,1,0,12,7,7],["Shire United",4,2,1,1,7,7,7],["Kingston Elite",2,2,0,0,8,0,6],["Hounslow Wolves XIs",4,1,1,2,11,10,4],["Bedfont Sunday",2,0,1,1,4,8,1],["SC Teddington",3,0,0,3,0,10,0]
@@ -1131,6 +1135,7 @@ const CONFIG = {
    ] }
   },
   news: [
+    { d:"2026-10-18", t:"Top-of-the-table test: Ickenham at the SKYex on Saturday", p:"Three wins and a draw from four league games have the Saturdays third, and leaders Ickenham come to Hayes on 24 October (2pm). It follows a narrow 0–1 Intermediate Cup exit to LBS Lions; the President's Division One Cup run continues at home to Rose on 28 November." },
     { d:"2026-10-18", t:"Sunday 1s sit second after a flying start", p:"Three wins from four in NSMBL Division One — 3–0 v Surbiton Lions, 2–0 at Ashford Rangers and 4–1 v Chiswick Athletic — plus a 6–1 Middlesex Junior Cup win at Larkspur Rovers. The XIs beat SC Teddington 3–0 and edged Burreli Camden on penalties in the Middlesex Intermediate Cup." },
     { d:"2026-09-10", t:"26/27 cup competitions confirmed", p:"Thirteen trophies across three squads this season, from the Middlesex County Cup on Saturdays to the London Cup and AFA Cup on Sundays. Full list in the fixtures section." },
     { d:"2026-09-05", t:"Saturdays open the season at home to Townmead", p:"The first team kick off the MCFL Division One West campaign on 12 September, with Wiseman West away and a cup tie the two weekends after." },
@@ -1224,8 +1229,8 @@ const kick=nextKick();$("#nextDate").textContent=kick.toLocaleDateString("en-GB"
 (()=>{const card=$("#nextCard");if(!card)return;const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
  if(fine){card.addEventListener("pointermove",e=>{const r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;card.style.transform=`perspective(900px) rotateY(${(px-.5)*8}deg) rotateX(${(.5-py)*8}deg) translateY(-4px)`;card.style.setProperty("--gx",px*100+"%");card.style.setProperty("--gy",py*100+"%")});card.addEventListener("pointerleave",()=>{card.style.transform=""})}
  const end=new Date(kick.getTime()+2*36e5),f=d=>d.toISOString().replace(/[-:]|\.\d{3}/g,"");
- const title="Kingston Elite v Hounslow Wolves (NSMBL Premier Division)";
- $("#calBtn").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(kick)}/${f(end)}&details=${encodeURIComponent("Come and support the Wolves. 10.30am kick-off, away at Kingston Elite. Check the squad WhatsApp or @hounslowwolves for the pitch. https://www.instagram.com/hounslowwolves")}&location=${encodeURIComponent("Kingston Elite FC (away)")}`;
+ const title="Hounslow Wolves v Ickenham (MCFL Division One West)";
+ $("#calBtn").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(kick)}/${f(end)}&details=${encodeURIComponent("Come and support the Wolves. 2pm kick-off at the SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL. 3rd v 1st. https://www.instagram.com/hounslowwolves")}&location=${encodeURIComponent("SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL")}`;
  $("#shareBtn").onclick=async()=>{const text=`${title} — ${kick.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}. Come and support the Wolves! 🐺`;try{if(navigator.share){await navigator.share({title:"Hounslow Wolves next fixture",text,url:location.href});return}}catch(e){}try{await navigator.clipboard.writeText(text+" "+location.href);toast("Fixture copied — paste it into WhatsApp")}catch(e){toast(text)}}})();
 
 /* squads */
@@ -1300,9 +1305,9 @@ function renderFx(v){const T=$("#fxTable");const list=CONFIG.fixtures[v]||[],res
  if(res.length)html+=`<thead><tr><th style="padding-top:22px">Results</th><th></th><th></th></tr></thead><tbody>${res.map(f=>`<tr><td class="d">${fmtD(f.d)}</td><td class="m">${W(f.h)} v ${W(f.a)}${f.note?`<div style="font-family:var(--body);font-size:12px;color:var(--muted);text-transform:none;font-weight:400">${f.note}</div>`:""}</td><td class="r"><span class="res ${f.r}">${f.r.toUpperCase()}</span>${f.s}</td></tr>`).join("")}</tbody>`;
  T.innerHTML=html}
 renderFx("sat");
-function renderTable(v){const T=(CONFIG.tables||{})[v];const card=$("#leagueCard");if(!T){card.style.display="none";return}card.style.display="";$("#ltName").textContent=T.name;$("#ltUpdated").textContent="Updated "+T.updated+" · FA Full-Time";
+function renderTable(v){const T=(CONFIG.tables||{})[v];const card=$("#leagueCard");if(!T){card.style.display="none";return}card.style.display="";$("#ltName").textContent=T.name;$("#ltUpdated").textContent="Updated "+T.updated+(v==="sat"?" · Mitoo":" · FA Full-Time");
  $("#lt").innerHTML=T.rows.map((r,i)=>`<tr class="${/Wolves/.test(r[0])?"us":""}"><td>${i+1}</td><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${(r[5]-r[6])>0?"+"+(r[5]-r[6]):(r[5]-r[6])}</td><td><b>${r[7]}</b></td></tr>`).join("");
- const f=((CONFIG.results||{})[v]||[]).slice(0,5).reverse();$("#formStrip").innerHTML=f.length?f.map(x=>`<span class="res ${x.r}">${x.r.toUpperCase()}</span>`).join(""):'<span style="font-size:12px;color:var(--muted)">No results yet</span>'}
+ $("#formLabel").textContent=({sat:"Saturdays",sun:"Sunday XIs",sun1:"Sunday 1s"}[v]||"")+" form";const f=((CONFIG.results||{})[v]||[]).slice(0,5).reverse();$("#formStrip").innerHTML=f.length?f.map(x=>`<span class="res ${x.r}">${x.r.toUpperCase()}</span>`).join(""):'<span style="font-size:12px;color:var(--muted)">No results yet</span>'}
 renderTable("sat");
 $("#fxTabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(!b)return;$$("#fxTabs .tab").forEach(t=>t.classList.toggle("on",t===b));renderFx(b.dataset.v);renderTable(b.dataset.v)});
 
