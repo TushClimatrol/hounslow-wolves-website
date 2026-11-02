@@ -360,8 +360,8 @@ a.sp{text-decoration:none}
 .tl-node.on i{border-color:var(--orange);background:var(--orange);box-shadow:0 0 0 7px rgba(255,106,19,.22);transform:scale(1.2)}
 .tl-node.on b{color:var(--orange)}
 .tl-node.on span{color:var(--bone)}
-.tl-stage{padding-inline:var(--gutter);max-width:1360px;margin:24px auto 0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center}
-.tl-year{font-family:var(--display);font-weight:900;font-size:clamp(72px,10vw,168px);line-height:.85;color:transparent;-webkit-text-stroke:2px var(--orange);letter-spacing:-.02em;position:relative;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl-stage{container-type:inline-size;padding-inline:var(--gutter);max-width:1360px;margin:24px auto 0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.tl-year{font-family:var(--display);font-weight:900;font-size:clamp(64px,11cqw,168px);line-height:.85;color:transparent;-webkit-text-stroke:2px var(--orange);letter-spacing:-.02em;position:relative;font-variant-numeric:tabular-nums;white-space:nowrap}
 .tl-year::after{content:attr(data-sub);position:absolute;left:4px;bottom:-30px;font-size:14px;letter-spacing:.2em;-webkit-text-stroke:0;color:var(--orange);font-weight:700}
 .tl-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3.5vw,44px);display:grid;gap:16px;min-height:300px;overflow:hidden}
 .tl-card::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 100% 0%,rgba(255,106,19,.16),transparent 60%);pointer-events:none}
@@ -381,7 +381,7 @@ a.sp{text-decoration:none}
 .tl-ctrl .auto i{width:34px;height:18px;border-radius:999px;background:var(--line);position:relative;transition:.2s}
 .tl-ctrl .auto i::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--bone);transition:.2s}
 .tl-ctrl .auto.on i{background:var(--orange)}.tl-ctrl .auto.on i::after{left:18px}
-@media(max-width:900px){.tl-stage{grid-template-columns:1fr;gap:56px}.tl-year{font-size:clamp(64px,17vw,120px)}.tl-node{min-width:140px}}
+@media(max-width:900px){.tl-stage{grid-template-columns:1fr;gap:56px}.tl-year{font-size:clamp(56px,22cqw,120px)}.tl-node{min-width:140px}}
 
 /* shop */
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
