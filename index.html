@@ -702,11 +702,11 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
         <p class="hero-lede">Hounslow Wolves FC is an FA England Accredited men's club in West London. Saturday first team in the MCFL Saturday Division One West, two Sunday sides in the NSMBL, and a five-a-side squad on the tournament circuit. Est. 2020.</p>
       <aside class="next" aria-label="Next fixture" id="nextCard">
         <div class="row"><span class="eyebrow">Next fixture · Saturdays</span><span class="num" id="nextDate" style="color:var(--muted);font-size:13px"></span></div>
-        <div class="teams"><em>Hounslow Wolves</em> vs Ickenham</div>
+        <div class="teams"><em>Hounslow Wolves</em> vs Rose</div>
         <div class="count" id="count" aria-live="off">
           <div><b id="cd">0</b><small>Days</small></div><div><b id="ch">0</b><small>Hrs</small></div><div><b id="cm">0</b><small>Min</small></div><div><b id="cs">0</b><small>Sec</small></div>
         </div>
-        <div class="row" style="font-size:13px;color:var(--muted)"><span>MCFL Division One West · Home · SKYex Stadium, Hayes</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
+        <div class="row" style="font-size:13px;color:var(--muted)"><span>President's Division One Cup · Round 2 · Home · SKYex Stadium, Hayes</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
         <div class="next-acts"><a class="btn btn-primary" id="calBtn" href="#" target="_blank" rel="noopener">Add to calendar</a><button class="btn btn-ghost" id="shareBtn" type="button">Share</button></div>
         <div class="next-status" id="nextStatus"></div>
       </aside>
@@ -1073,7 +1073,7 @@ const CONFIG = {
   paypalLink: "",                                      // bookings
   paypalShopLink: "",                                  // club shop checkout
   paypalSubsLink: "",                                  // player subs payment                                      // PayPal payment link for bookings (set once created)
-  nextFixture: "2026-10-24T14:00:00",                  // Hounslow Wolves v Ickenham (Saturdays, MCFL Div One West) — 2pm KO, SKYex
+  nextFixture: "2026-11-07T14:00:00",                  // Hounslow Wolves v Rose (Saturdays, President's Division One Cup R2) — 2pm KO, SKYex
   prices: { trial: 10, session: 8, monthly: 40, annual: 150 },   // placeholders
   teams: [
     { id:"sat",   name:"Wolves Saturdays", sub:"First team", cat:"sat",   league:"MCFL Saturday Division One West", cups:"Middlesex County Cup · League Cup", day:"Wednesday", time:"20:15–22:00", venue:"Springwest Academy, Feltham", home:"Hayes & Yeading United FC (astro), Hayes", coach:"Tarren Patel", spots:3, level:"Step 7 standard · competitive" },
@@ -1083,9 +1083,11 @@ const CONFIG = {
   ],
   fixtures: {
     sat: [   // MCFL Saturday Division One West — source: Mitoo (LeagueCode MDX2026, DivisionID 101). Saturday KO 14:00.
-      { d:"2026-10-24", t:"14:00", comp:"MCFL Saturday Division One West", h:"Hounslow Wolves", a:"Ickenham", venue:"SKYex Community Stadium, Hayes (H)" },
+      { d:"2026-11-07", t:"14:00", comp:"Jim Rogers President's Division One Cup · Round 2", h:"Hounslow Wolves", a:"Rose", venue:"SKYex Community Stadium, Hayes (H)" },
       { d:"2026-11-14", t:"14:00", comp:"MCFL Saturday Division One West", h:"East Sheen", a:"Hounslow Wolves", venue:"Rosslyn Park FC (A)" },
-      { d:"2026-11-28", t:"14:00", comp:"Jim Rogers President's Division One Cup · Round 2", h:"Hounslow Wolves", a:"Rose", venue:"SKYex Community Stadium, Hayes (H)" }
+      { d:"2026-11-21", t:"14:00", comp:"MCFL Saturday Division One West", h:"Ruislip Rangers", a:"Hounslow Wolves", venue:"Ruislip Rangers (A)" },
+      { d:"2026-11-28", t:"14:00", comp:"MCFL Saturday Division One West", h:"CB Hounslow & Abbots Senior Reserves", a:"Hounslow Wolves", venue:"CB Hounslow & Abbots (A)" },
+      { d:"2026-12-05", t:"14:00", comp:"MCFL Saturday Division One West", h:"AFC Southall", a:"Hounslow Wolves", venue:"AFC Southall (A)" }
     ],
     sun: [   // "Hounslow Wolves Sunday" on FA Full-Time — NSMBL Premier Division
       { d:"2026-10-25", t:"10:30", comp:"NSMBL Premier Division", h:"Kingston Elite", a:"Hounslow Wolves XIs", venue:"Kingston Elite (A)" },
@@ -1230,7 +1232,7 @@ const kick=nextKick();$("#nextDate").textContent=kick.toLocaleDateString("en-GB"
 (()=>{const card=$("#nextCard");if(!card)return;const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
  if(fine){card.addEventListener("pointermove",e=>{const r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;card.style.transform=`perspective(900px) rotateY(${(px-.5)*8}deg) rotateX(${(.5-py)*8}deg) translateY(-4px)`;card.style.setProperty("--gx",px*100+"%");card.style.setProperty("--gy",py*100+"%")});card.addEventListener("pointerleave",()=>{card.style.transform=""})}
  const end=new Date(kick.getTime()+2*36e5),f=d=>d.toISOString().replace(/[-:]|\.\d{3}/g,"");
- const title="Hounslow Wolves v Ickenham (MCFL Division One West)";
+ const title="Hounslow Wolves v Rose (Jim Rogers President's Division One Cup, Round 2)";
  $("#calBtn").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(kick)}/${f(end)}&details=${encodeURIComponent("Come and support the Wolves. 2pm kick-off at the SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL. 3rd v 1st. https://www.instagram.com/hounslowwolves")}&location=${encodeURIComponent("SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL")}`;
  $("#shareBtn").onclick=async()=>{const text=`${title} — ${kick.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}. Come and support the Wolves! 🐺`;try{if(navigator.share){await navigator.share({title:"Hounslow Wolves next fixture",text,url:location.href});return}}catch(e){}try{await navigator.clipboard.writeText(text+" "+location.href);toast("Fixture copied — paste it into WhatsApp")}catch(e){toast(text)}}})();
 
