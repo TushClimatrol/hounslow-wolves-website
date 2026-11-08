@@ -916,7 +916,7 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
     <div class="sec-head" style="margin-bottom:0">
       <p class="eyebrow">Join the Wolves</p>
       <h2>Want to play? Tell us about you.</h2>
-      <p class="lede">Fill out this form to contact management. Pick the squad you're after and tell us about yourself — it goes straight to Rishi and Ballu, and their direct contact details unlock once it's sent. Please don't come down to training until one of them has confirmed a session with you.</p>
+      <p class="lede">Fill out this form to contact management. Pick the squad you're after and tell us about yourself — it goes straight to Hounslow Wolves Admin, and their direct contact details unlock once it's sent. Please don't come down to training until the admin team has confirmed a session with you.</p>
     </div>
     <div class="book-grid">
       <div class="steps" id="steps">
@@ -1034,7 +1034,7 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
 
 <section class="sec" id="contact" style="background:var(--ink-2);border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="sec-head rv"><p class="eyebrow">Contact</p><h2>Talk to the pack.</h2><p class="lede">Questions about joining, sponsorship, or friendlies? Message us and it goes straight to Rishi and Ballu — one of them will get back to you within two working days.</p></div>
+    <div class="sec-head rv"><p class="eyebrow">Contact</p><h2>Talk to the pack.</h2><p class="lede">Questions about joining, sponsorship, or friendlies? Message us and it goes straight to Hounslow Wolves Admin — someone will get back to you within two working days.</p></div>
     <div class="contact-grid">
       <div class="rv">
         <div class="people">
@@ -1059,7 +1059,7 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
           <div class="field full"><label for="cSubject">Subject</label><select id="cSubject"><option>Joining the club</option><option>Trials</option><option>Friendly / fixture request</option><option>Sponsorship enquiry</option><option>Something else</option></select></div>
           <div class="field full"><label for="cMsg">Message</label><textarea id="cMsg" rows="5" required></textarea></div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:12px;color:var(--faint)">Opens your email app with everything filled in, addressed to Rishi &amp; Ballu — just press send.</span><button class="btn btn-primary" type="submit">Send message <span class="arr">→</span></button></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font-size:12px;color:var(--faint)">Opens your email app with everything filled in, addressed to Hounslow Wolves Admin — just press send.</span><button class="btn btn-primary" type="submit">Send message <span class="arr">→</span></button></div>
       </form>
     </div>
   </div>
@@ -1323,15 +1323,15 @@ function renderPanel(){const P=$("#panel");const t=booking.team&&JOIN_TEAMS.find
   <div class="field full"><label for="bClubs">Previous clubs &amp; level played <span style="color:var(--orange)">*</span></label><textarea id="bClubs" rows="2" required placeholder="e.g. Isleworth Athletic 2023–25 (MCFL Div 2), Hounslow Borough U18s">${esc(booking.clubs)}</textarea></div>
   <div class="field full"><label for="bNotes">Anything else? (availability, injuries)</label><textarea id="bNotes" rows="2">${esc(booking.notes)}</textarea></div>
   <input type="text" id="bHoney" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true"></div>
-  <div class="notice"><b>Please don't come down until we confirm.</b> Rishi or Ballu will look at your details and message you to arrange a session.</div>
+  <div class="notice"><b>Please don't come down until we confirm.</b> Hounslow Wolves Admin will look at your details and message you to arrange a session.</div>
   <div class="panel-foot"><button class="btn btn-ghost" id="back2">← Back</button><span class="err" id="err"></span><button class="btn btn-primary" id="sendBtn">Send to the managers <span class="arr">→</span></button></div>`;
   $("#back2").onclick=()=>{grab();setStep(1)};
   $("#sendBtn").onclick=async()=>{grab();if($("#bHoney").value)return;if(!booking.player||!booking.email||!booking.phone){$("#err").textContent="Name, mobile and email are needed so the managers can get back to you.";return}if(!/^\S+@\S+\.\S+$/.test(booking.email)){$("#err").textContent="That email doesn't look right.";return}if(!booking.clubs){$("#err").textContent="Tell us your previous clubs and the level you've played at — the managers need this first.";return}
    booking.ref=booking.ref||("HW-"+Date.now().toString(36).toUpperCase().slice(-5));const btn=$("#sendBtn");btn.disabled=true;btn.textContent="Sending…";$("#err").textContent="";
    booking.sent=await sendForm();try{localStorage.setItem("hwfc.join",JSON.stringify(booking))}catch(e){}setStep(3)}}
  if(step===3){const to=CONFIG.managers.map(m=>m.email).join(",");const mail=`mailto:${to}?subject=${encodeURIComponent("Joining Hounslow Wolves – "+t.name+" – "+booking.player)}&body=${encodeURIComponent(formBody())}`;
-  P.innerHTML=`<h3>${booking.sent?"Sent — Rishi and Ballu have your form.":"Nearly there — send your form."}</h3>
-   ${booking.sent?`<div class="notice" style="border-color:rgba(63,191,127,.5);background:rgba(63,191,127,.1)"><b style="color:var(--good)">Form delivered.</b> Your details for <b>${t.name}</b> are in the managers' inboxes (ref <b>${booking.ref}</b>). Keep an eye on ${esc(booking.email)} and your phone.</div>`:`<div class="notice"><b>We couldn't deliver it automatically from this device.</b> Tap the button below and it opens an email to both managers with everything already filled in — just press send.</div><div class="send-row"><a class="btn btn-primary" id="mailBtn" href="${mail}">Email the form to Rishi &amp; Ballu <span class="arr">→</span></a></div>`}
+  P.innerHTML=`<h3>${booking.sent?"Sent — Hounslow Wolves Admin have your form.":"Nearly there — send your form."}</h3>
+   ${booking.sent?`<div class="notice" style="border-color:rgba(63,191,127,.5);background:rgba(63,191,127,.1)"><b style="color:var(--good)">Form delivered.</b> Your details for <b>${t.name}</b> are in the managers' inboxes (ref <b>${booking.ref}</b>). Keep an eye on ${esc(booking.email)} and your phone.</div>`:`<div class="notice"><b>We couldn't deliver it automatically from this device.</b> Tap the button below and it opens an email to both managers with everything already filled in — just press send.</div><div class="send-row"><a class="btn btn-primary" id="mailBtn" href="${mail}">Email the form to Hounslow Wolves Admin <span class="arr">→</span></a></div>`}
    <div><p class="eyebrow" style="margin-bottom:10px">Contact the managers directly</p>${managerCards()}</div>
    <p style="font-size:13px;color:var(--muted);margin:0">Quote your reference <b style="color:var(--bone)">${booking.ref}</b> if you message them. Please don't come down to training until one of them has confirmed a session.</p>
    <div class="panel-foot"><button class="btn-link" id="startOver" style="background:none;border:0;color:var(--muted);text-decoration:underline;font-size:13px">Start again</button></div>`;
