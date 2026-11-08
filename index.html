@@ -1,4 +1,10 @@
 <title>Hounslow Wolves FC</title>
+<link rel="canonical" href="https://hounslowwolvesfc.com/">
+<meta name="description" content="Hounslow Wolves FC — FA England Accredited men's football club in West London. Saturday first team (MCFL), two Sunday sides (NSMBL) and a 5-a-side squad. Fixtures, results, squads and how to join.">
+<meta property="og:title" content="Hounslow Wolves FC">
+<meta property="og:description" content="Hunt as a pack. FA England Accredited men's football club in West London — fixtures, results, squads and how to join.">
+<meta property="og:url" content="https://hounslowwolvesfc.com/">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap">
 <style>
@@ -706,7 +712,7 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
         <div class="count" id="count" aria-live="off">
           <div><b id="cd">0</b><small>Days</small></div><div><b id="ch">0</b><small>Hrs</small></div><div><b id="cm">0</b><small>Min</small></div><div><b id="cs">0</b><small>Sec</small></div>
         </div>
-        <div class="row" style="font-size:13px;color:var(--muted)"><span>President's Division One Cup · Round 2 · Home · SKYex Stadium, Hayes</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
+        <div class="row" style="font-size:13px;color:var(--muted)"><span id="nextMeta">President's Division One Cup · Round 2 · Home · SKYex Stadium, Hayes</span><a href="#fixtures" style="color:var(--orange);text-decoration:none;font-weight:600">All fixtures →</a></div>
         <div class="next-acts"><a class="btn btn-primary" id="calBtn" href="#" target="_blank" rel="noopener">Add to calendar</a><button class="btn btn-ghost" id="shareBtn" type="button">Share</button></div>
         <div class="next-status" id="nextStatus"></div>
       </aside>
@@ -1222,8 +1228,15 @@ frame();
 if(reduce){/* settle instantly */const st=()=>{for(const p of pts){p.x=p.hx;p.y=p.hy}};setTimeout(st,50)}})();
 
 /* countdown */
-function nextKick(){if(CONFIG.nextFixture&&new Date(CONFIG.nextFixture)>new Date())return new Date(CONFIG.nextFixture);const up=Object.values(CONFIG.fixtures).flat().map(f=>new Date(f.d+"T"+(f.t||"14:00")+":00")).filter(d=>d>new Date()).sort((a,b)=>a-b);if(up[0])return up[0];const d=new Date();d.setDate(d.getDate()+((6-d.getDay()+7)%7||7));d.setHours(14,0,0,0);return d}
-const kick=nextKick();$("#nextDate").textContent=kick.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})+" · KO "+kick.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+const SQUAD_LABEL={sat:"Saturdays",sun:"Sunday XIs",sun1:"Sunday 1s"};
+function nextFixtureObj(){const now=new Date();const all=[];for(const k in CONFIG.fixtures)(CONFIG.fixtures[k]||[]).forEach(f=>{const d=new Date(f.d+"T"+(f.t||"14:00")+":00");if(d>now)all.push({...f,k,kick:d})});all.sort((a,b)=>a.kick-b.kick);return all[0]||null}
+const NEXT=nextFixtureObj();
+function nextKick(){if(NEXT)return NEXT.kick;if(CONFIG.nextFixture&&new Date(CONFIG.nextFixture)>new Date())return new Date(CONFIG.nextFixture);const d=new Date();d.setDate(d.getDate()+((6-d.getDay()+7)%7||7));d.setHours(14,0,0,0);return d}
+const kick=nextKick();
+if(NEXT){const us=/Hounslow Wolves/;const home=us.test(NEXT.h);const venue=(NEXT.venue||"").replace(/\s*\((H|A)\)\s*$/,"");
+ $("#nextCard .eyebrow").textContent="Next fixture · "+(SQUAD_LABEL[NEXT.k]||"");
+ $("#nextCard .teams").innerHTML=home?`<em>Hounslow Wolves</em> vs ${NEXT.a}`:`${NEXT.h} vs <em>Hounslow Wolves</em>`;
+ $("#nextMeta").textContent=[NEXT.comp,home?"Home":"Away",venue].filter(Boolean).join(" · ")}$("#nextDate").textContent=kick.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})+" · KO "+kick.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
 (function tick(){const s=Math.max(0,(kick-new Date())/1000);const v={cd:Math.floor(s/86400),ch:String(Math.floor(s%86400/3600)).padStart(2,"0"),cm:String(Math.floor(s%3600/60)).padStart(2,"0"),cs:String(Math.floor(s%60)).padStart(2,"0")};
  for(const k in v){const el=$("#"+k);if(el.textContent!==String(v[k])){el.textContent=v[k];el.classList.remove("flip");void el.offsetWidth;el.classList.add("flip")}}
  const since=(new Date()-kick)/6e4;const st=$("#nextStatus");if(since>=0&&since<120){st.className="next-status live";st.innerHTML="<i></i> Match day — kicked off "+kick.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}else if(since>=120){st.className="next-status live";st.innerHTML="Full time — next fixture coming soon"}
@@ -1232,8 +1245,10 @@ const kick=nextKick();$("#nextDate").textContent=kick.toLocaleDateString("en-GB"
 (()=>{const card=$("#nextCard");if(!card)return;const fine=matchMedia("(hover:hover) and (pointer:fine)").matches;
  if(fine){card.addEventListener("pointermove",e=>{const r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;card.style.transform=`perspective(900px) rotateY(${(px-.5)*8}deg) rotateX(${(.5-py)*8}deg) translateY(-4px)`;card.style.setProperty("--gx",px*100+"%");card.style.setProperty("--gy",py*100+"%")});card.addEventListener("pointerleave",()=>{card.style.transform=""})}
  const end=new Date(kick.getTime()+2*36e5),f=d=>d.toISOString().replace(/[-:]|\.\d{3}/g,"");
- const title="Hounslow Wolves v Rose (Jim Rogers President's Division One Cup, Round 2)";
- $("#calBtn").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(kick)}/${f(end)}&details=${encodeURIComponent("Come and support the Wolves. 2pm kick-off at the SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL. 3rd v 1st. https://www.instagram.com/hounslowwolves")}&location=${encodeURIComponent("SKYex Community Stadium, Beaconsfield Road, Hayes UB4 0SL")}`;
+ const title=NEXT?`${NEXT.h} v ${NEXT.a} (${NEXT.comp})`:"Hounslow Wolves — next fixture";
+ const loc=NEXT?(NEXT.venue||"").replace(/\s*\((H|A)\)\s*$/,""):"Hounslow, West London";
+ const ko=kick.toLocaleTimeString("en-GB",{hour:"numeric",minute:"2-digit"});
+ $("#calBtn").href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(kick)}/${f(end)}&details=${encodeURIComponent("Come and support the Wolves. "+ko+" kick-off. Check the squad WhatsApp or @hounslowwolves for pitch changes. https://hounslowwolvesfc.com")}&location=${encodeURIComponent(loc)}`;
  $("#shareBtn").onclick=async()=>{const text=`${title} — ${kick.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}. Come and support the Wolves! 🐺`;try{if(navigator.share){await navigator.share({title:"Hounslow Wolves next fixture",text,url:location.href});return}}catch(e){}try{await navigator.clipboard.writeText(text+" "+location.href);toast("Fixture copied — paste it into WhatsApp")}catch(e){toast(text)}}})();
 
 /* squads */
