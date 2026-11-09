@@ -416,12 +416,25 @@ a.sp{text-decoration:none}
 @media(max-width:900px){.tl-stage{grid-template-columns:1fr;gap:56px}.tl-year{font-size:clamp(56px,22cqw,120px)}.tl-node{min-width:140px}}
 
 /* shop */
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.prod{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;transition:transform .22s,border-color .22s}
-.prod:hover{transform:translateY(-4px);border-color:var(--orange)}
+.shop-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;perspective:1200px}
+@media(max-width:1100px){.shop-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter);scrollbar-width:none;-webkit-overflow-scrolling:touch}.shop-grid::-webkit-scrollbar{display:none}.shop-grid .prod{flex:0 0 min(72vw,300px);scroll-snap-align:start}}
+.prod{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;transition:transform .15s ease-out,border-color .22s,box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.prod::before{content:"";position:absolute;inset:-1px;z-index:2;border-radius:12px;background:radial-gradient(160px 120px at var(--gx,50%) var(--gy,0%),rgba(255,106,19,.22),transparent 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+.prod:hover,.prod:focus-within{border-color:var(--orange);box-shadow:0 30px 60px -28px rgba(255,106,19,.55)}
+.prod:hover::before,.prod:focus-within::before{opacity:1}
+.prod .pic{cursor:pointer}
+.prod .pic svg{transform:translate(var(--px,0),var(--py,0))}
+.prod .pic svg.spin{animation:spin .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes spin{0%{transform:rotateY(0) scale(1)}50%{transform:rotateY(180deg) scale(1.08)}100%{transform:rotateY(360deg) scale(1)}}
+.prod .add.pop{animation:pop .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
+.sizes button{transition:.15s}.sizes button:hover{border-color:var(--bone);color:var(--bone)}.sizes button:active{transform:scale(.92)}
+.prod .hint{position:absolute;left:12px;bottom:10px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);opacity:0;transition:opacity .25s;pointer-events:none}
+.prod:hover .hint{opacity:.9}
+@media(hover:none){.prod .hint{display:none}}
 .prod .pic{aspect-ratio:1;background:radial-gradient(70% 70% at 50% 40%,#25272d,var(--ink-2));display:grid;place-items:center;position:relative;overflow:hidden}
 .prod .pic svg{width:62%;height:62%;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5));transition:transform .3s}
-.prod:hover .pic svg{transform:translateY(-4px) scale(1.04)}
+.prod:hover .pic svg{transform:translate(var(--px,0),var(--py,0)) translateY(-4px) scale(1.04)}
 .prod .pic .badge-new{position:absolute;top:12px;left:12px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;padding:5px 9px;background:var(--orange);color:var(--orange-ink);border-radius:999px;font-weight:700}
 .prod .info{padding:18px;display:grid;gap:12px;grid-template-rows:auto auto 1fr auto;align-content:start}
 .prod h3{font-size:24px}
@@ -560,7 +573,6 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
   .tl-ctrl .hint{visibility:hidden}
 }
 @media(max-width:600px){
-  .shop-grid{grid-template-columns:1fr 1fr;gap:10px}
   .prod .info{padding:12px;gap:10px}
   .prod h3{font-size:19px}
   .prod .pr{font-size:22px}
@@ -1401,8 +1413,6 @@ const STORY = [
 /* ===================== SHOP ===================== */
 const SHOP = [
   { id:"shirt",  n:"Matchday shirt",        p:30, sizes:["S","M","L","XL","XXL"], badge:"26/27", art:"shirt" },
-  { id:"shorts", n:"Matchday shorts",       p:15, sizes:["S","M","L","XL","XXL"], art:"shorts" },
-  { id:"socks",  n:"Matchday socks",        p:10, sizes:["6–8","9–11","12–14"],  art:"socks" },
   { id:"train",  n:"Training top",          p:15, sizes:["S","M","L","XL","XXL"], art:"train" },
   { id:"hoodie", n:"Wolves hoodie",         p:30, sizes:["S","M","L","XL","XXL"], art:"hoodie" },
   { id:"cap",    n:"Wolves cap",            p:15, sizes:["One size"],             art:"cap" },
@@ -1417,12 +1427,14 @@ const ART={
  cap:`<svg viewBox="0 0 120 120"><path d="M28 62c0-20 14-34 32-34s32 14 32 34v6H28z" fill="#0B0B0D" stroke="#2A2C33"/><path d="M26 68h70c14 0 22 6 20 12-24-2-58-2-90 0-2-6 0-12 0-12z" fill="#FF6A13"/><path d="M60 28v40" stroke="#2A2C33" stroke-width="2"/><image href="${LOGO_MARK}" x="49" y="40" width="22" height="18"/></svg>`,
  jacket:`<svg viewBox="0 0 120 120"><path d="M38 20l22 6 22-6 22 14-10 18-8-4v56H36V48l-8 4-10-18z" fill="#16171B" stroke="#2A2C33"/><path d="M60 26v78" stroke="#FF6A13" stroke-width="3"/><path d="M50 20c4 8 16 8 20 0" stroke="#FF6A13" stroke-width="3" fill="none"/><path d="M36 92h48" stroke="#FF6A13" stroke-width="4"/><image href="${LOGO_MARK}" x="68" y="44" width="12" height="10"/></svg>`
 };
-(()=>{const grid=$("#shopGrid");let cart=[];try{cart=JSON.parse(localStorage.getItem("hwfc.cart")||"[]")}catch(e){}
+(()=>{const grid=$("#shopGrid");let cart=[];try{cart=JSON.parse(localStorage.getItem("hwfc.cart")||"[]")}catch(e){}cart=cart.filter(c=>SHOP.some(p=>p.id===c.id));
  const sel={};
- grid.innerHTML=SHOP.map(p=>`<article class="prod"><div class="pic">${p.badge?`<span class="badge-new">${p.badge}</span>`:""}${ART[p.art]}</div><div class="info"><div class="row"><h3>${p.n}</h3><span class="pr num">${gbp(p.p)}</span></div><div class="sizes" data-p="${p.id}">${p.sizes.map((s,k)=>`<button class="${k===(p.sizes.length>1?1:0)?"on":""}" data-s="${s}" aria-label="Size ${s}">${s}</button>`).join("")}</div><button class="btn btn-primary add" data-add="${p.id}">Add to basket</button></div></article>`).join("");
+ grid.innerHTML=SHOP.map(p=>`<article class="prod"><div class="pic" data-spin="${p.id}">${p.badge?`<span class="badge-new">${p.badge}</span>`:""}${ART[p.art]}<span class="hint">Click to spin</span></div><div class="info"><div class="row"><h3>${p.n}</h3><span class="pr num">${gbp(p.p)}</span></div><div class="sizes" data-p="${p.id}">${p.sizes.map((s,k)=>`<button class="${k===(p.sizes.length>1?1:0)?"on":""}" data-s="${s}" aria-label="Size ${s}">${s}</button>`).join("")}</div><button class="btn btn-primary add" data-add="${p.id}">Add to basket</button></div></article>`).join("");
  SHOP.forEach(p=>sel[p.id]=p.sizes[p.sizes.length>1?1:0]);
- grid.addEventListener("click",e=>{const sb=e.target.closest(".sizes button");if(sb){const pid=sb.parentElement.dataset.p;sel[pid]=sb.dataset.s;$$("button",sb.parentElement).forEach(x=>x.classList.toggle("on",x===sb));return}
-  const ab=e.target.closest("[data-add]");if(!ab)return;const p=SHOP.find(x=>x.id===ab.dataset.add);const size=sel[p.id];const line=cart.find(c=>c.id===p.id&&c.size===size);line?line.q++:cart.push({id:p.id,size,q:1});save();ab.textContent="Added ✓";setTimeout(()=>ab.textContent="Add to basket",1200);toast(p.n+" ("+size+") added to your basket")});
+ if(matchMedia("(hover:hover) and (pointer:fine)").matches){grid.addEventListener("pointermove",e=>{const c=e.target.closest(".prod");if(!c)return;const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.transform=`perspective(900px) rotateY(${(px-.5)*10}deg) rotateX(${(.5-py)*10}deg) translateY(-6px)`;c.style.setProperty("--gx",px*100+"%");c.style.setProperty("--gy",py*100+"%");c.style.setProperty("--px",(px-.5)*14+"px");c.style.setProperty("--py",(py-.5)*10+"px")});grid.addEventListener("pointerleave",e=>{$$(".prod",grid).forEach(c=>{c.style.transform="";c.style.removeProperty("--px");c.style.removeProperty("--py")})},true);grid.addEventListener("pointerout",e=>{const c=e.target.closest(".prod");if(c&&!c.contains(e.relatedTarget)){c.style.transform="";c.style.removeProperty("--px");c.style.removeProperty("--py")}})}
+ grid.addEventListener("click",e=>{const pic=e.target.closest("[data-spin]");if(pic){const sv=pic.querySelector("svg");sv.classList.remove("spin");void sv.offsetWidth;sv.classList.add("spin");return}
+  const sb=e.target.closest(".sizes button");if(sb){const pid=sb.parentElement.dataset.p;sel[pid]=sb.dataset.s;$$("button",sb.parentElement).forEach(x=>x.classList.toggle("on",x===sb));return}
+  const ab=e.target.closest("[data-add]");if(!ab)return;const p=SHOP.find(x=>x.id===ab.dataset.add);const size=sel[p.id];const line=cart.find(c=>c.id===p.id&&c.size===size);line?line.q++:cart.push({id:p.id,size,q:1});save();ab.textContent="Added ✓";ab.classList.remove("pop");void ab.offsetWidth;ab.classList.add("pop");setTimeout(()=>ab.textContent="Add to basket",1200);toast(p.n+" ("+size+") added to your basket")});
  function save(){try{localStorage.setItem("hwfc.cart",JSON.stringify(cart))}catch(e){}render()}
  function total(){return cart.reduce((a,c)=>a+SHOP.find(p=>p.id===c.id).p*c.q,0)}
  function render(){const n=cart.reduce((a,c)=>a+c.q,0);$("#cartCount").textContent=n;$("#cartTotal").textContent=gbp(total());$("#cartBtn").classList.toggle("show",n>0);$("#cartSum").textContent=gbp(total());
