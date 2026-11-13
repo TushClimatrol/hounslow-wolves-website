@@ -644,7 +644,9 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
 .mgr .acts a:hover{transform:translateY(-2px)}
 .mgr .acts a.off{opacity:.35;pointer-events:none}
 .mgr.mgr-dark{background:var(--surface);border-color:var(--line)}.mgr.mgr-dark small{color:var(--muted)}.mgr.mgr-dark .acts a{background:var(--orange);color:var(--orange-ink)}
-.squad-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.squad-pick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.squad-pick .choice{align-content:start;min-height:100%}
+@media(max-width:420px){.squad-pick{grid-template-columns:1fr}}
 .send-row{display:flex;gap:10px;flex-wrap:wrap}
 .send-row .btn{flex:1;justify-content:center}
 .send-row .btn.wa{background:#25D366;color:#06301a;border-color:transparent}
@@ -1403,7 +1405,7 @@ async function sendForm(){const t=JOIN_TEAMS.find(x=>x.id===booking.team);const 
  const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),12000);
  try{const r=await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload),signal:ctl.signal});clearTimeout(timer);if(!r.ok)throw new Error(r.status);const j=await r.json().catch(()=>({}));if(j&&j.success===false&&!/activate/i.test(j.message||""))throw new Error(j.message||"rejected");return true}catch(e){clearTimeout(timer);return false}}
 function renderPanel(){const P=$("#panel");const t=booking.team&&JOIN_TEAMS.find(x=>x.id===booking.team);
- if(step===1){P.innerHTML=`<h3>Which squad are you after?</h3><div class="squad-pick">${JOIN_TEAMS.map(x=>`<button class="choice ${booking.team===x.id?"on":""}" data-t="${x.id}"><b>${x.name}</b><span>${x.league}</span><span>${x.id==="fives"?"Plus tournament weekends":"Trains midweek at Brunel University"}</span></button>`).join("")}</div>
+ if(step===1){P.innerHTML=`<h3>Which squad are you after?</h3><div class="squad-pick">${JOIN_TEAMS.map(x=>`<button class="choice ${booking.team===x.id?"on":""}" data-t="${x.id}"><b>${x.name}</b><span>${x.id==="fives"?"Best in West 5-a-side league":x.league}</span><span>${x.id==="fives"?"Mondays + tournament weekends":"Trains midweek at Brunel University"}</span></button>`).join("")}</div>
   <p style="font-size:13px;color:var(--muted)">Not sure? Pick the closest fit — the admin team will point you to the right squad.</p>
   <div class="panel-foot"><span class="err" id="err"></span><button class="btn btn-primary" id="next1">Your details <span class="arr">→</span></button></div>`;
   $$("[data-t]",P).forEach(b=>b.onclick=()=>{booking.team=b.dataset.t;$$("[data-t]",P).forEach(x=>x.classList.toggle("on",x===b));$("#err").textContent=""});
