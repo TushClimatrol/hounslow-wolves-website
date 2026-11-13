@@ -694,15 +694,21 @@ a,button,summary,label,.slot,.choice,.cat,.tab{-webkit-tap-highlight-color:trans
 .nav.no-affil .affil-nav{display:none}
 .nav.no-affil ~ .hero .affil-hero{display:flex;flex-wrap:wrap}
 .nav:not(.no-affil) ~ .hero .affil-hero{display:none}
-/* phones/tablets (compact nav): the badges sit in the header as a second row, not in the hero */
+/* phones/tablets (compact nav): the badges stay in the header, on the same row, right next to the Join button */
 .nav.compact ~ .hero .affil-hero{display:none}
-.nav.no-affil.compact .affil-nav{display:flex;order:10;flex:1 1 100%;justify-content:center;gap:8px;margin:0;padding:0 0 8px;border-left:0}
-.nav.compact .wrap{height:auto;min-height:62px;flex-wrap:wrap;row-gap:0}
-.nav.compact .wrap>.brand,.nav.compact .wrap>.nav-cta{min-height:62px}
-.nav.compact .wrap>.brand{flex:0 1 auto;min-width:0}
-@media(max-width:380px){.nav.compact .brand b{display:none}}
+.nav.no-affil.compact .affil-nav{display:flex;flex:0 0 auto;margin:0 0 0 auto;padding:0;border-left:0;gap:6px}
+.nav.compact .wrap{height:62px;flex-wrap:nowrap}
+.nav.compact .wrap>.brand{flex:none}
 .nav.compact .affil-nav .aff{width:36px;height:36px;padding:4px}.nav.compact .affil-nav .aff.wide{width:80px}
-@media(max-width:360px){.nav.compact .affil-nav{gap:5px}.nav.compact .affil-nav .aff{width:34px;height:34px}.nav.compact .affil-nav .aff.wide{width:76px}}
+@media(max-width:900px){.nav.compact .hide-sm{display:none}.nav.compact .affil-nav .aff{width:32px;height:32px;padding:3px}.nav.compact .affil-nav .aff.wide{width:70px}}
+@media(max-width:600px){
+ .nav.compact .wrap{padding-inline:12px;gap:4px}
+ .nav.compact .brand b{display:none}.nav.compact .brand{gap:0}.nav.compact .crest{width:34px}
+ .nav.no-affil.compact .affil-nav{gap:4px}.nav.compact .affil-nav .aff{width:26px;height:26px;padding:2px;border-radius:6px}.nav.compact .affil-nav .aff.wide{width:58px}
+ .nav.compact .nav-cta{gap:4px}.nav.compact .nav-cta .btn{padding:9px 9px;font-size:13px}.nav.compact .nav-ig,.nav.compact .burger{width:33px;height:33px}.nav.compact .nav-ig svg{width:18px;height:18px}
+}
+@media(max-width:384px){.nav.compact .affil-nav .aff{width:24px;height:24px}.nav.compact .affil-nav .aff.wide{width:53px}}
+@media(max-width:364px){.nav.compact .nav-ig{display:none}}
 .nav.no-affil .nav-cta .btn-ghost{display:none}
 .nav.compact .menu{display:none;position:absolute;left:0;right:0;top:100%;margin:0;background:var(--ink-2);border-bottom:1px solid var(--line);flex-direction:column;gap:0;padding:8px var(--gutter) 16px;justify-content:flex-start}
 .nav.compact .menu.open{display:flex}
